@@ -1,0 +1,28 @@
+:root {
+  --cor-primaria: #084f91;
+  --cor-secundaria: rgb(20, 135, 170);
+  --cor-terciaria: #1f75bb;
+  --cor-quaternaria: #6262a1;
+  --cor-background: #14181e;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  background-color: var(--cor-background);
+  overflow-y: hidden;
+}
+
+* {
+  color: #44496b;
+  text-decoration: none;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+input {
+  padding: 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border-radius: 5px;
+  outline: none;
+}

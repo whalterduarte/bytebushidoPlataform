@@ -1,0 +1,70 @@
+.container {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.imgUser {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #438be9;
+  margin-bottom: 20px;
+}
+.area {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 50px;
+  background-color: #6d767c;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+.area h3 {
+  background-color: rgb(36, 34, 34);
+  border-radius: 5px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+}
+.area span {
+  color: #d6d3d3;
+  font-size: small;
+  margin-left: 10px;
+}
+
+.icon {
+  font-size: 40px;
+  padding: 10px;
+}
+
+.githubIcon {
+  background-color: antiquewhite;
+  border-radius: 50%;
+  margin: 5px;
+}
+
+.linkedinIcon {
+  background-color: antiquewhite;
+  border-radius: 50%;
+  margin: 5px;
+}
+.editInfo {
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #438be9;
+  color: #292626;
+  transition: 0.6s;
+  border: none;
+  cursor: pointer;
+}
+.editInfo:hover {
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #c0cfe2;
+  color: #292626;
+}
+.editarea {
+  margin-bottom: 10px;
+}

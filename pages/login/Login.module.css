@@ -1,0 +1,79 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 95vh;
+}
+.container label {
+  color: antiquewhite;
+  font-size: small;
+}
+.login {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: #282a33;
+  padding: 20px;
+  border-radius: 5px;
+  width: 300px;
+}
+.input {
+  margin-top: 10px;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+}
+.loginButton {
+  width: 50%;
+  padding: 10px;
+  background: linear-gradient(to top right, #182937 100%, #96a1b6 100%);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+}
+.cadastroButton {
+  width: 50%;
+  padding: 10px;
+  background: linear-gradient(to top right, #0cc78f 100%, #96a1b6 100%);
+  color: rgb(5, 5, 5);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  text-align: center;
+}
+.cadastroButton:hover {
+  background: linear-gradient(to top right, #10bea1 0%, #919aa1 100%);
+}
+.loginButton:hover {
+  background: linear-gradient(to top right, #104dbe 0%, #919aa1 100%);
+}
+.error {
+  color: red;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.sair {
+  display: flex;
+  padding: 15px;
+
+  background-color: #fd0505;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 15px;
+  margin-bottom: 50px;
+  cursor: pointer;
+  align-items: center;
+}
+.userDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

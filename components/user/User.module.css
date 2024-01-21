@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.imgUser {
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #438be9;
+}
