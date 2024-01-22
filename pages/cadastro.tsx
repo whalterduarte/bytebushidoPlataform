@@ -56,7 +56,7 @@ const Cadastro: React.FC = () => {
       }
 
       const response = await axios.post(
-        "http://localhost:3001/register",
+        `${process.env.BASEAPI}/register`,
         formDataToSend
       );
 

@@ -1,0 +1,103 @@
+/* Cursos.module.css */
+.mainContainer {
+  width: 90%;
+  height: 90vh;
+}
+.menuContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  width: 90%;
+}
+.page {
+  display: flex;
+
+  width: 90%;
+  padding: 20px;
+  align-items: center;
+  border-radius: 5px;
+  background-color: #2b2d3b;
+}
+
+.sidebar {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  padding: 20px;
+  background-color: #2b2d3b;
+  border-radius: 5px;
+}
+
+.sidebar h2 {
+  margin-bottom: 10px;
+}
+
+.submenu {
+  padding: 20px;
+  display: flex;
+}
+
+.mainContent {
+  border-top: 1px solid #ccc;
+  padding: 20px;
+  flex: 2;
+}
+
+.selectedCursoContent {
+  text-align: center;
+}
+
+/* Adicione estilos adicionais conforme necessário */
+
+.cursomenu {
+  background-color: #17212c;
+  border-radius: 5px;
+  padding: 10px;
+  width: 200px;
+  color: #2b2d3b;
+}
+.video {
+  margin-left: 50px;
+  width: 90%;
+  max-width: 720px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  padding: 2px;
+}
+.titleCurso {
+  color: #577594;
+  margin-bottom: 10px;
+  background-color: #070707;
+  border-radius: 5px;
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+}
+.info {
+  background-color: #17212c;
+  border-radius: 5px;
+  padding: 10px;
+  width: 400px;
+  height: 500px;
+}
+.titleInfo {
+  color: #fff;
+  background-color: #0f0f0f;
+  text-align: center;
+  font-size: 1em;
+  padding: 5px;
+}
+.descInfo {
+  font-size: 0.8em;
+  color: #a7a6a6;
+  font-family: Arial, Helvetica, sans-serif;
+
+  margin-bottom: 100px;
+}
+.info a {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}

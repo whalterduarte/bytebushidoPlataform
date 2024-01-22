@@ -5,4 +5,5 @@ export type User = {
   photo: string;
   git: string;
   linkedin: string;
+  token: string;
 };

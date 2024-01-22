@@ -62,8 +62,7 @@
 .sair {
   display: flex;
   padding: 15px;
-
-  background-color: #fd0505;
+  background-color: #0b5a8f;
   border: none;
   border-radius: 5px;
   color: #fff;
@@ -71,7 +70,10 @@
   margin-bottom: 50px;
   cursor: pointer;
   align-items: center;
+  width: 100px;
+  display: block;
 }
+
 .userDetails {
   display: flex;
   flex-direction: column;

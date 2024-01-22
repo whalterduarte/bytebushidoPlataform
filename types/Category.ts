@@ -5,7 +5,7 @@ export type CategoryType = {
   photo: string;
   createdAt: string;
   categoria: Categoria;
-  subcategorias: SubCategory[];
+  subcategorias: SubcategoryType[];
 };
 
 export type Categoria = {
@@ -14,27 +14,30 @@ export type Categoria = {
   title: string;
   photo: string;
   createdAt: string;
-  subcategorias: SubCategory[];
-  cursos: CourseType[];  // Adicione esta linha
+  subcategorias: SubcategoryType[];
+  cursos: CursoType[]; // Adicione esta linha
 };
 
-export type SubCategory = {
+export type SubcategoryType = {
   id: number;
-  slugSubCategory: string;
+  slugSub: string;
   categoriaId: number;
   title: string;
   photo: string;
   createdAt: string;
-  cursos: CourseType[];
+  slug: string;
+  cursos: CursoType[];
 };
 
-export type CourseType = {
+export type CursoType = {
   id: number;
-  slugCursos: string;  // Corrija aqui para referenciar slugCursos
-  photo: string,
+  slugCurso: string;
+  photo: string;
   title: string;
-  file: string;
+  video: string;
+  description: string;
+  git: string;
   createdAt: string;
   subcategoriaId: number;
-  subcategoria: SubCategory;
+  subcategoria: SubcategoryType;
 };
