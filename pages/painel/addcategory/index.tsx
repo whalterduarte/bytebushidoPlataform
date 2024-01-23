@@ -1,6 +1,6 @@
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "../../../styles/components/addcategory.module.css";
 import axios from "axios";
 
@@ -9,6 +9,18 @@ const AddCategoria = () => {
   const [title, setTitle] = useState("");
   const [photo, setPhoto] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const session = await getSession();
+
+      if (!session) {
+        router.push("/login");
+      }
+    };
+
+    fetchData(); // Chama a função fetchData para evitar o aviso do ESLint
+  }, [router]); // Adiciona 'router' ao array de dependências
 
   const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {

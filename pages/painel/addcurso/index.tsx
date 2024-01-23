@@ -1,5 +1,3 @@
-// pages/cursos/categorias/subcategorias/addcurso.tsx
-
 import { useEffect } from "react";
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -45,7 +43,7 @@ const AddCurso = () => {
     };
 
     fetchSubcategories();
-  }, []);
+  }, [router]);
 
   const handleVideoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {

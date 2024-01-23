@@ -77,7 +77,9 @@ const NavBar = () => {
             <UserComponent session={session}></UserComponent>
           </Link>
         ) : (
-          <Link href="/login">ENTRAR</Link>
+          <Link className={style.loginLink} href="/login">
+            ENTRAR
+          </Link>
         )}
       </div>
     </nav>

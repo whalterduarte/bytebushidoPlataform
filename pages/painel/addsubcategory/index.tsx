@@ -3,8 +3,8 @@ import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import styles from "../../../styles/components/addcategory.module.css";
-import axios from "axios";
-import { CategoryType } from "../../../types/Category"; // Substitua pelo caminho real
+import axios, { AxiosRequestConfig } from "axios";
+import { CategoryType } from "../../../types/Category";
 
 const AddSubcategoria = () => {
   const router = useRouter();
@@ -23,7 +23,7 @@ const AddSubcategoria = () => {
 
         if (session) {
           const response = await axios.get<{ categories: CategoryType[] }>(
-            `${process.env.BASEAPI}/cursos/`,
+            `${process.env.BASEAPI}/cursos`,
             {
               headers: {
                 Authorization: `Bearer ${session.user.token}`,
@@ -41,7 +41,7 @@ const AddSubcategoria = () => {
     };
 
     fetchCategories();
-  }, []);
+  }, [router]);
 
   const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -80,7 +80,7 @@ const AddSubcategoria = () => {
       formData.append("photo", photo as Blob);
       formData.append("categoriaId", String(selectedCategoryId));
 
-      const config = {
+      const config: AxiosRequestConfig<FormData> = {
         headers: {
           Authorization: `Bearer ${session.user.token}`,
         },

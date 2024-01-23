@@ -18,7 +18,7 @@ const UserComponent: React.FC<UserComponentProps> = ({ session }) => {
     const fetchToken = async () => {
       try {
         if (session) {
-          const res = await axios.get("http://localhost:3000/api/auth/session");
+          const res = await axios.get(`${process.env.BASE}/api/auth/session`);
           const sessionData = res.data;
           setToken(sessionData.user.token);
         }

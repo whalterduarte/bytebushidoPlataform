@@ -74,3 +74,13 @@
   position: absolute;
   bottom: 40px;
 }
+.loginLink {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  transition: 0.7s;
+}
+.loginLink:hover {
+  background-color: #733b43;
+  color: #fff;
+}
