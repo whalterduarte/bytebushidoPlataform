@@ -34,7 +34,7 @@ const UserComponent: React.FC<UserComponentProps> = ({ session }) => {
     const fetchData = async () => {
       try {
         if (token) {
-          const res = await axios.get(`${process.env.BASEAPI}/users`, {
+          const res = await axios.get(`https://api-byte.vercel.app/users`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
