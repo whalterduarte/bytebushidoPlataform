@@ -24,7 +24,7 @@ const UserDetails: React.FC<UserComponentProps> = ({ session }) => {
   const closeEditModal = () => {
     setIsEdit(false);
   };
-
+  //aqui
   useEffect(() => {
     const fetchToken = async () => {
       try {

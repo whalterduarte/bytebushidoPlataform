@@ -13,7 +13,7 @@ interface UserComponentProps {
 const UserComponent: React.FC<UserComponentProps> = ({ session }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
-
+  //
   useEffect(() => {
     const fetchToken = async () => {
       try {
