@@ -14,7 +14,7 @@ const authOptions: NextAuthOptions = {
       },
       async authorize(credentials, req) {
         try {
-          const response = await fetch(`${process.env.BASEAPI}/login`, {
+          const response = await fetch(`https://api-byte.vercel.app/login`, {
             method: "POST",
             headers: {
               "Content-type": "application/json",
