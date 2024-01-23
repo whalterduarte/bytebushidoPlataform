@@ -2,7 +2,6 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import card from "../../styles/components/cursos/card.module.css";
-import style from "../../styles/components/cursos/cursos.module.css";
 import { getSession } from "next-auth/react";
 import { CategoryType } from "../../types/Category";
 import { GetServerSideProps } from "next";
@@ -21,9 +20,14 @@ const Curso: React.FC<CursoProps> = ({ categories }: CursoProps) => {
 
   useEffect(() => {
     // Tratamento de redirecionamento no lado do cliente
-    if (sessionStatus === "unauthenticated") {
-      router.push("/login");
-    }
+    const redirectTimeout = setTimeout(() => {
+      if (sessionStatus === "unauthenticated") {
+        router.push("/login");
+      }
+    }, 1000); // Tempo de espera em milissegundos (ajuste conforme necessário)
+
+    // Limpe o timeout quando o componente for desmontado
+    return () => clearTimeout(redirectTimeout);
   }, [sessionStatus, router]);
 
   // Tratamento de estados de sessão
@@ -38,39 +42,37 @@ const Curso: React.FC<CursoProps> = ({ categories }: CursoProps) => {
   // Agora, podemos renderizar o conteúdo do componente normalmente
   return (
     <div>
-      <div>
-        {/* Conteúdo do componente Curso */}
-        {session?.user?.role === "admin" && <Painel />}
-        {session?.user?.role !== "admin" && (
-          <main>
-            <h1>Cursos</h1>
-            {categories.length === 0 ? (
-              <p>Nenhum curso disponível no momento.</p>
-            ) : (
-              <h1 className={card.main}>
-                {categories.map((cat) => (
-                  <Link
-                    href={`cursos/${cat.slug}`}
-                    className={card.container}
-                    key={cat.id}
-                  >
-                    <Image
-                      className={card.img}
-                      src={cat.photo}
-                      alt={cat.title}
-                      width={220}
-                      height={200}
-                    />
-                    <Link className={card.category} href={`cursos/${cat.slug}`}>
-                      {cat.title}
-                    </Link>
+      {/* Conteúdo do componente Curso */}
+      {session?.user?.role === "admin" && <Painel />}
+      {session?.user?.role !== "admin" && (
+        <main>
+          <h1>Cursos</h1>
+          {categories.length === 0 ? (
+            <p>Nenhum curso disponível no momento.</p>
+          ) : (
+            <h1 className={card.main}>
+              {categories.map((cat) => (
+                <Link
+                  href={`cursos/${cat.slug}`}
+                  className={card.container}
+                  key={cat.id}
+                >
+                  <Image
+                    className={card.img}
+                    src={cat.photo}
+                    alt={cat.title}
+                    width={220}
+                    height={200}
+                  />
+                  <Link className={card.category} href={`cursos/${cat.slug}`}>
+                    {cat.title}
                   </Link>
-                ))}
-              </h1>
-            )}
-          </main>
-        )}
-      </div>
+                </Link>
+              ))}
+            </h1>
+          )}
+        </main>
+      )}
     </div>
   );
 };
@@ -78,20 +80,13 @@ const Curso: React.FC<CursoProps> = ({ categories }: CursoProps) => {
 export default Curso;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const slug = context.params?.slug;
   const session = await getSession(context);
 
-  // Comente a lógica de redirecionamento do lado do servidor
-  // if (!session) {
-  //   return {
-  //     redirect: {
-  //       destination: "/login",
-  //       permanent: false,
-  //     },
-  //   };
-  // }
-
   try {
+    if (!session) {
+      throw new Error("Usuário não autenticado");
+    }
+
     const res = await axios.get(`https://api-byte.vercel.app/cursos`, {
       headers: {
         Authorization: `Bearer ${session?.user?.token || ""}`,
@@ -122,7 +117,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   } catch (error) {
     console.error("Erro ao buscar categorias:", error);
 
-    // Redirecionar para a página de login em caso de erro
+    // Redirecionar para a página de login em caso de erro ou usuário não autenticado
     return {
       redirect: {
         destination: "/login",
