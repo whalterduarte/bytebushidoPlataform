@@ -20,9 +20,13 @@ const Curso: React.FC<CursoProps> = ({ categories }: CursoProps) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (!session) {
-      router.push("/");
-    }
+    const checkSession = async () => {
+      if (!session) {
+        await router.push("/");
+      }
+    };
+
+    checkSession();
   }, [session, router]);
 
   return (
