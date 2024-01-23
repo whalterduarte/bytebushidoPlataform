@@ -38,38 +38,28 @@
   padding: 20px;
   display: flex;
 }
-
-.mainContent {
-  border-top: 1px solid #ccc;
-  padding: 20px;
-  flex: 2;
+.subPhoto {
+  cursor: pointer;
 }
 
 .selectedCursoContent {
   text-align: center;
+  margin-left: 20px;
+  min-width: 720px;
 }
-
-/* Adicione estilos adicionais conforme necessário */
 
 .cursomenu {
-  background-color: #17212c;
+  background-color: #d3d6da;
   border-radius: 5px;
   padding: 10px;
-  width: 200px;
+  width: 250px;
   color: #2b2d3b;
 }
-.video {
-  margin-left: 50px;
-  width: 90%;
-  max-width: 720px;
-  border-radius: 5px;
-  background-color: #ffffff;
-  padding: 2px;
-}
+
 .titleCurso {
-  color: #577594;
+  color: #eaecee;
   margin-bottom: 10px;
-  background-color: #070707;
+  background-color: #3b3737;
   border-radius: 5px;
   text-align: center;
   padding: 10px;
@@ -79,7 +69,7 @@
   background-color: #17212c;
   border-radius: 5px;
   padding: 10px;
-  width: 400px;
+  width: 300px;
   height: 500px;
 }
 .titleInfo {
@@ -100,4 +90,39 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+}
+
+.welcome {
+  margin-left: 20px;
+  background-color: #14181e;
+  width: 100%;
+
+  height: 100%;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 1100px) {
+  .submenu {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .imgWelcome {
+    width: 300px;
+    height: 100%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .imgWelcome {
+    width: 200px;
+    height: 100%;
+  }
 }

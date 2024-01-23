@@ -12,6 +12,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import ReactPlayer from "react-player";
 
 interface CategoriaProps {
   category: CategoryType;
@@ -37,11 +38,16 @@ const Categoria: React.FC<CategoriaProps> = ({ category }: CategoriaProps) => {
   return (
     <div className={styles.mainContainer}>
       <div className={styles.menuContainer}>
-        {/* Menu lateral para os títulos do curso */}
         <aside className={styles.sidebar}>
           {category.subcategorias.map((sub) => (
             <div key={sub.id} onClick={() => setSelectedSubcategory(sub)}>
-              <Image src={sub.photo} alt={sub.title} width={50} height={50} />
+              <Image
+                className={styles.subPhoto}
+                src={sub.photo}
+                alt={sub.title}
+                width={50}
+                height={50}
+              />
             </div>
           ))}
         </aside>
@@ -51,36 +57,59 @@ const Categoria: React.FC<CategoriaProps> = ({ category }: CategoriaProps) => {
           <main className={styles.mainContent}>
             {selectedSubcategory ? (
               <div className={styles.cursomenu} key={selectedSubcategory.id}>
-                {selectedSubcategory.cursos.map((curso) => (
-                  <div
-                    className={styles.titleCurso}
-                    key={curso.id}
-                    onClick={() => handleCursoClick(curso)}
-                  >
-                    {curso.title}
+                {selectedSubcategory.cursos.length > 0 ? (
+                  selectedSubcategory.cursos.map((curso) => (
+                    <div
+                      className={styles.titleCurso}
+                      key={curso.id}
+                      onClick={() => handleCursoClick(curso)}
+                    >
+                      {curso.title}
+                    </div>
+                  ))
+                ) : (
+                  <div className={styles.noCursoMessage}>
+                    Nada por aqui ainda. Estamos trabalhando duro para trazer
+                    novos cursos em breve. Fique de olho!
                   </div>
-                ))}
+                )}
               </div>
             ) : (
-              <p>Selecione uma subcategoria no menu lateral.</p>
+              <div className={styles.cursomenu}>
+                <p className={styles.titleCurso}>
+                  Selecione uma curso no menu superior.
+                </p>
+              </div>
             )}
           </main>
 
-          {/* Exibição do curso selecionado */}
           <div>
             {selectedCurso ? (
               <div className={styles.selectedCursoContent}>
-                <video
-                  className={styles.video}
-                  key={selectedCurso.video}
+                <ReactPlayer
+                  url={selectedCurso.video}
                   controls
-                >
-                  <source src={selectedCurso.video} type="video/mp4" />
-                  Seu navegador não suporta o elemento de vídeo.
-                </video>
+                  width="100%"
+                  height="100%"
+                  config={{
+                    file: {
+                      attributes: {
+                        controlsList: "nodownload",
+                      },
+                    },
+                  }}
+                />
               </div>
             ) : (
-              <div>BEM VINDO AO CURSO DE WHALTER</div>
+              <div className={styles.welcome}>
+                <Image
+                  className={styles.imgWelcome}
+                  src={"/torre.png"}
+                  alt=""
+                  height={500}
+                  width={500}
+                />
+              </div>
             )}
           </div>
         </div>
@@ -108,6 +137,7 @@ const Categoria: React.FC<CategoriaProps> = ({ category }: CategoriaProps) => {
     </div>
   );
 };
+
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {

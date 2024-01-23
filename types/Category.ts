@@ -1,3 +1,5 @@
+// Importe os tipos necessários aqui
+
 export type CategoryType = {
   id: number;
   slug: string;
@@ -15,7 +17,7 @@ export type Categoria = {
   photo: string;
   createdAt: string;
   subcategorias: SubcategoryType[];
-  cursos: CursoType[]; // Adicione esta linha
+  cursos: CursoType[];
 };
 
 export type SubcategoryType = {

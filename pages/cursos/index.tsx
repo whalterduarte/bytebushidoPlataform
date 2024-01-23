@@ -9,6 +9,7 @@ import { GetServerSideProps } from "next";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
+import Painel from "../../components/painel/Painel";
 
 interface CursoProps {
   categories: CategoryType[];
@@ -31,7 +32,7 @@ const Curso: React.FC<CursoProps> = ({ categories }: CursoProps) => {
         <div>
           {/* Conteúdo do componente Curso */}
 
-          {session?.user?.role === "admin" && <p>Você é um administrador.</p>}
+          {session?.user?.role === "admin" && <Painel />}
           {session?.user?.role !== "admin" && (
             <main>
               <h1>Cursos</h1>
