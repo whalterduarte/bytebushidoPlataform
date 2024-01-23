@@ -1,12 +1,11 @@
-import { getSession, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import card from "../../styles/components/cursos/card.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import Painel from "../../components/painel/Painel";
 import { CategoryType } from "../../types/Category";
-import { GetServerSideProps } from "next";
 import axios from "axios";
 
 interface CursoProps {
@@ -16,16 +15,48 @@ interface CursoProps {
 const Curso: React.FC<CursoProps> = ({ categories }: CursoProps) => {
   const { data: session, status: sessionStatus } = useSession();
   const router = useRouter();
+  const [accessToken, setAccessToken] = useState<string | null>(null);
 
   useEffect(() => {
-    const checkSession = async () => {
-      if (!session) {
-        await router.push("/");
+    const fetchToken = async () => {
+      try {
+        if (session) {
+          const res = await axios.get(
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/session`
+          );
+          const sessionData = res.data;
+          setAccessToken(sessionData.user.token);
+        }
+      } catch (error) {
+        console.error("Error fetching token:", error);
       }
     };
 
-    checkSession();
-  }, [session, router]);
+    fetchToken();
+  }, [session]);
+
+  const fetchData = async () => {
+    try {
+      if (accessToken) {
+        const res = await axios.get(`https://api-byte.vercel.app/cursos`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        const data = res.data;
+        console.log("Dados da API:", data);
+      }
+    } catch (error) {
+      console.error("Erro ao buscar categorias:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (accessToken) {
+      fetchData();
+    }
+  }, [accessToken]);
 
   return (
     <div>
@@ -74,45 +105,3 @@ const Curso: React.FC<CursoProps> = ({ categories }: CursoProps) => {
 };
 
 export default Curso;
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const slug = context.params?.slug;
-  const session = await getSession(context);
-
-  // Se o usuário não estiver autenticado, redirecione para a página de login
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  }
-
-  try {
-    // Faça a chamada para a API com o slug e o token de acesso
-    const res = await axios.get(`https://api-byte.vercel.app/users`, {
-      headers: {
-        Authorization: `Bearer ${
-          session.user.token || session.user.token || ""
-        }`,
-      },
-    });
-
-    const data = res.data;
-
-    return {
-      props: {
-        categories: data.categories || [],
-      },
-    };
-  } catch (error) {
-    console.error("Erro ao buscar categorias:", error);
-
-    return {
-      props: {
-        categories: [],
-      },
-    };
-  }
-};
