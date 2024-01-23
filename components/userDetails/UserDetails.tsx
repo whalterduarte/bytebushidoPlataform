@@ -29,7 +29,9 @@ const UserDetails: React.FC<UserComponentProps> = ({ session }) => {
     const fetchToken = async () => {
       try {
         if (session) {
-          const res = await axios.get(`${process.env.BASE}/api/auth/session`);
+          const res = await axios.get(
+            `https://api-byte.vercel.app/api/auth/session`
+          );
           const sessionData = res.data;
           setToken(sessionData.user.token);
         }
