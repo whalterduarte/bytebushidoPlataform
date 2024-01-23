@@ -21,7 +21,7 @@ const Curso: React.FC<CursoProps> = ({ categories }: CursoProps) => {
 
   useEffect(() => {
     if (!session) {
-      router.push("/login");
+      router.push("/");
     }
   }, [session, router]);
 
