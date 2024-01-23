@@ -145,7 +145,12 @@ export const getServerSideProps: GetServerSideProps = async (
   const session = await getSession(context);
 
   if (!session) {
-    throw new Error("Usuário não autenticado");
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
   }
 
   try {
