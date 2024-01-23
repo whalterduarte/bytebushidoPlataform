@@ -20,10 +20,10 @@ const Curso: React.FC<CursoProps> = ({ categories }: CursoProps) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (sessionStatus === "unauthenticated") {
+    if (!session) {
       router.push("/login");
     }
-  }, [sessionStatus, router]);
+  }, [session, router]);
 
   return (
     <div>
