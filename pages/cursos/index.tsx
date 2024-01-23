@@ -31,31 +31,37 @@ const Curso: React.FC<CursoProps> = ({ categories }: CursoProps) => {
       {sessionStatus === "authenticated" && (
         <div>
           {/* Conteúdo do componente Curso */}
-
-          {session?.user?.role === "admin" && <p>painel</p>}
+          {session?.user?.role === "admin" && <Painel />}
           {session?.user?.role !== "admin" && (
             <main>
               <h1>Cursos</h1>
-              <h1 className={card.main}>
-                {categories.map((cat) => (
-                  <Link
-                    href={`cursos/${cat.slug}`}
-                    className={card.container}
-                    key={cat.id}
-                  >
-                    <Image
-                      className={card.img}
-                      src={cat.photo}
-                      alt={cat.title}
-                      width={220}
-                      height={200}
-                    />
-                    <Link className={card.category} href={`cursos/${cat.slug}`}>
-                      {cat.title}
+              {categories.length === 0 ? (
+                <p>Nenhum curso disponível no momento.</p>
+              ) : (
+                <h1 className={card.main}>
+                  {categories.map((cat) => (
+                    <Link
+                      href={`cursos/${cat.slug}`}
+                      className={card.container}
+                      key={cat.id}
+                    >
+                      <Image
+                        className={card.img}
+                        src={cat.photo}
+                        alt={cat.title}
+                        width={220}
+                        height={200}
+                      />
+                      <Link
+                        className={card.category}
+                        href={`cursos/${cat.slug}`}
+                      >
+                        {cat.title}
+                      </Link>
                     </Link>
-                  </Link>
-                ))}
-              </h1>
+                  ))}
+                </h1>
+              )}
             </main>
           )}
         </div>
