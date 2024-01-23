@@ -19,8 +19,8 @@ const AddCategoria = () => {
       }
     };
 
-    fetchData(); // Chama a função fetchData para evitar o aviso do ESLint
-  }, [router]); // Adiciona 'router' ao array de dependências
+    fetchData();
+  }, [router]);
 
   const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -67,7 +67,7 @@ const AddCategoria = () => {
       };
 
       const response = await axios.post(
-        `${process.env.BASEAPI}/cursos/category`,
+        `https://api-byte.vercel.app/cursos/category`,
         formData,
         config
       );

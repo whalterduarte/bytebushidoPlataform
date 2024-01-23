@@ -18,7 +18,9 @@ const UserComponent: React.FC<UserComponentProps> = ({ session }) => {
     const fetchToken = async () => {
       try {
         if (session) {
-          const res = await axios.get(`${process.env.BASE}/api/auth/session`);
+          const res = await axios.get(
+            `https://aluno-bytebushido.vercel.app/api/auth/session`
+          );
           const sessionData = res.data;
           setToken(sessionData.user.token);
         }
@@ -34,7 +36,7 @@ const UserComponent: React.FC<UserComponentProps> = ({ session }) => {
     const fetchData = async () => {
       try {
         if (token) {
-          const res = await axios.get(`${process.env.BASEAPI}/users`, {
+          const res = await axios.get(`https://api-byte.vercel.app/users`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },

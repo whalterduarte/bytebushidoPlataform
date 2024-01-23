@@ -154,7 +154,7 @@ export const getServerSideProps: GetServerSideProps = async (
   }
 
   try {
-    const res = await axios.get(`${process.env.BASEAPI}/cursos`, {
+    const res = await axios.get(`https://api-byte.vercel.app/cursos`, {
       headers: {
         Authorization: `Bearer ${session.user.token || ""}`,
       },

@@ -56,7 +56,7 @@ const Cadastro: React.FC = () => {
       }
 
       const response = await axios.post(
-        `${process.env.BASEAPI}/register`,
+        `https://api-byte.vercel.app/register`,
         formDataToSend
       );
 
