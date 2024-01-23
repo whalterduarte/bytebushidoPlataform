@@ -20,52 +20,57 @@ const Curso: React.FC<CursoProps> = ({ categories }: CursoProps) => {
   const router = useRouter();
 
   useEffect(() => {
+    // Tratamento de redirecionamento no lado do cliente
     if (sessionStatus === "unauthenticated") {
       router.push("/login");
     }
   }, [sessionStatus, router]);
 
+  // Tratamento de estados de sessão
+  if (sessionStatus === "loading") {
+    return <div>Carregando...</div>;
+  }
+
+  if (sessionStatus === "unauthenticated") {
+    return <div>Você não está autenticado. Redirecionando para o login...</div>;
+  }
+
+  // Agora, podemos renderizar o conteúdo do componente normalmente
   return (
     <div>
-      {sessionStatus === "loading" && <div>Carregando...</div>}
-      {sessionStatus === "authenticated" && (
-        <div>
-          {/* Conteúdo do componente Curso */}
-          {session?.user?.role === "admin" && <Painel />}
-          {session?.user?.role !== "admin" && (
-            <main>
-              <h1>Cursos</h1>
-              {sessionStatus !== undefined && categories.length === 0 ? (
-                <p>Nenhum curso disponível no momento.</p>
-              ) : (
-                <h1 className={card.main}>
-                  {categories.map((cat) => (
-                    <Link
-                      href={`cursos/${cat.slug}`}
-                      className={card.container}
-                      key={cat.id}
-                    >
-                      <Image
-                        className={card.img}
-                        src={cat.photo}
-                        alt={cat.title}
-                        width={220}
-                        height={200}
-                      />
-                      <Link
-                        className={card.category}
-                        href={`cursos/${cat.slug}`}
-                      >
-                        {cat.title}
-                      </Link>
+      <div>
+        {/* Conteúdo do componente Curso */}
+        {session?.user?.role === "admin" && <Painel />}
+        {session?.user?.role !== "admin" && (
+          <main>
+            <h1>Cursos</h1>
+            {categories.length === 0 ? (
+              <p>Nenhum curso disponível no momento.</p>
+            ) : (
+              <h1 className={card.main}>
+                {categories.map((cat) => (
+                  <Link
+                    href={`cursos/${cat.slug}`}
+                    className={card.container}
+                    key={cat.id}
+                  >
+                    <Image
+                      className={card.img}
+                      src={cat.photo}
+                      alt={cat.title}
+                      width={220}
+                      height={200}
+                    />
+                    <Link className={card.category} href={`cursos/${cat.slug}`}>
+                      {cat.title}
                     </Link>
-                  ))}
-                </h1>
-              )}
-            </main>
-          )}
-        </div>
-      )}
+                  </Link>
+                ))}
+              </h1>
+            )}
+          </main>
+        )}
+      </div>
     </div>
   );
 };
@@ -76,23 +81,20 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const slug = context.params?.slug;
   const session = await getSession(context);
 
-  // Se o usuário não estiver autenticado, redirecione para a página de login
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  }
+  // Comente a lógica de redirecionamento do lado do servidor
+  // if (!session) {
+  //   return {
+  //     redirect: {
+  //       destination: "/login",
+  //       permanent: false,
+  //     },
+  //   };
+  // }
 
   try {
-    // Faça a chamada para a API com o slug e o token de acesso
     const res = await axios.get(`https://api-byte.vercel.app/cursos`, {
       headers: {
-        Authorization: `Bearer ${
-          session.user.token || session.user.token || ""
-        }`,
+        Authorization: `Bearer ${session?.user?.token || ""}`,
       },
     });
 
