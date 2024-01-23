@@ -98,19 +98,35 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     });
 
+    if (res.status !== 200) {
+      console.error(
+        "Erro ao buscar categorias - Status não OK:",
+        res.status,
+        res.statusText
+      );
+      throw new Error("Erro ao buscar categorias");
+    }
+
     const data = res.data;
+
+    if (!data || !data.categories) {
+      console.error("Erro ao buscar categorias - Dados inválidos:", data);
+      throw new Error("Erro ao buscar categorias");
+    }
 
     return {
       props: {
-        categories: data.categories || [],
+        categories: data.categories,
       },
     };
   } catch (error) {
     console.error("Erro ao buscar categorias:", error);
 
+    // Redirecionar para a página de login em caso de erro
     return {
-      props: {
-        categories: [],
+      redirect: {
+        destination: "/login",
+        permanent: false,
       },
     };
   }
