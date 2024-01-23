@@ -37,24 +37,31 @@ const Curso: React.FC<CursoProps> = ({ categories }: CursoProps) => {
             <main>
               <h1>Cursos</h1>
               <h1 className={card.main}>
-                {categories.map((cat) => (
-                  <Link
-                    href={`cursos/${cat.slug}`}
-                    className={card.container}
-                    key={cat.id}
-                  >
-                    <Image
-                      className={card.img}
-                      src={cat.photo}
-                      alt={cat.title}
-                      width={220}
-                      height={200}
-                    />
-                    <Link className={card.category} href={`cursos/${cat.slug}`}>
-                      {cat.title}
+                {categories && categories.length > 0 ? (
+                  categories.map((cat) => (
+                    <Link
+                      href={`cursos/${cat.slug}`}
+                      className={card.container}
+                      key={cat.id}
+                    >
+                      <Image
+                        className={card.img}
+                        src={cat.photo}
+                        alt={cat.title}
+                        width={220}
+                        height={200}
+                      />
+                      <Link
+                        className={card.category}
+                        href={`cursos/${cat.slug}`}
+                      >
+                        {cat.title}
+                      </Link>
                     </Link>
-                  </Link>
-                ))}
+                  ))
+                ) : (
+                  <p>Nenhum curso disponível.</p>
+                )}
               </h1>
             </main>
           )}
