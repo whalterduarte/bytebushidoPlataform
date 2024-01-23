@@ -9,6 +9,7 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import Painel from "../../components/painel/Painel";
+import { send } from "process";
 
 interface CursoProps {
   categories: CategoryType[];
@@ -22,15 +23,13 @@ const Curso: React.FC<CursoProps> = ({ categories }: CursoProps) => {
     // Tratamento de redirecionamento no lado do cliente
     const redirectTimeout = setTimeout(() => {
       if (sessionStatus === "unauthenticated") {
-        router.push("/login");
+        return <div>Voce esta {sessionStatus}</div>;
       }
-    }, 1000); // Tempo de espera em milissegundos (ajuste conforme necessário)
+    }, 1000);
 
-    // Limpe o timeout quando o componente for desmontado
     return () => clearTimeout(redirectTimeout);
   }, [sessionStatus, router]);
 
-  // Tratamento de estados de sessão
   if (sessionStatus === "loading") {
     return <div>Carregando...</div>;
   }
