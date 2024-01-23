@@ -32,7 +32,7 @@ const Curso: React.FC<CursoProps> = ({ categories }: CursoProps) => {
         <div>
           {/* Conteúdo do componente Curso */}
 
-          {session?.user?.role === "admin" && <Painel />}
+          {session?.user?.role === "admin" && <p>painel</p>}
           {session?.user?.role !== "admin" && (
             <main>
               <h1>Cursos</h1>
