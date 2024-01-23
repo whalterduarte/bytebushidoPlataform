@@ -35,7 +35,7 @@ const Curso: React.FC<CursoProps> = ({ categories }: CursoProps) => {
           {session?.user?.role !== "admin" && (
             <main>
               <h1>Cursos</h1>
-              {categories.length === 0 ? (
+              {categories.length === 0 && sessionStatus !== "loading" ? (
                 <p>Nenhum curso disponível no momento.</p>
               ) : (
                 <h1 className={card.main}>
