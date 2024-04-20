@@ -23,7 +23,7 @@ const AddSubcategoria = () => {
 
         if (session) {
           const response = await axios.get<{ categories: CategoryType[] }>(
-            `https://api-byte.vercel.app/cursos`,
+            `${process.env.BASEAPI}/cursos`,
             {
               headers: {
                 Authorization: `Bearer ${session.user.token}`,
@@ -87,7 +87,7 @@ const AddSubcategoria = () => {
       };
 
       const response = await axios.post(
-        `https://api-byte.vercel.app/cursos/categorias/subcategorias`,
+        `${process.env.BASEAPI}/cursos/categorias/subcategorias`,
         formData,
         config
       );

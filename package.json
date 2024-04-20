@@ -20,8 +20,9 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^5.0.1",
-    "react-player": "^2.14.1",
+    "react-player": "^2.16.0",
     "react-query": "^3.39.3",
+    "react-responsive-select": "^7.0.4",
     "react-video-js": "^0.1.96",
     "video-react": "^0.16.0",
     "video.js": "^8.9.0"

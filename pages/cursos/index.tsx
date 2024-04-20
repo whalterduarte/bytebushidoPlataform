@@ -2,7 +2,6 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import card from "../../styles/components/cursos/card.module.css";
-import style from "../../styles/components/cursos/cursos.module.css";
 import { getSession } from "next-auth/react";
 import { CategoryType } from "../../types/Category";
 import { GetServerSideProps } from "next";
@@ -80,8 +79,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   try {
-    // Faça a chamada para a API com o slug e o token de acesso
-    const res = await axios.get(`https://api-byte.vercel.app/cursos`, {
+    const res = await axios.get(`${process.env.BASEAPI}/cursos`, {
       headers: {
         Authorization: `Bearer ${
           session.user.token || session.user.token || ""

@@ -12,7 +12,6 @@ const EdicaoModal: React.FC<EdicaoModalProps> = ({ closeEditModal }) => {
         Fechar Modal
       </button>
       <h2>Modal de Edição</h2>
-      {/* Conteúdo do modal de edição */}
     </div>
   );
 };

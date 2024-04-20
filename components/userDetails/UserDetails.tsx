@@ -6,7 +6,6 @@ import axios from "axios";
 import Image from "next/image";
 import { FaGithub } from "react-icons/fa";
 import { LiaLinkedinIn } from "react-icons/lia";
-import Link from "next/link";
 import EdicaoModal from "./EdicaoModal";
 
 interface UserComponentProps {
@@ -24,13 +23,12 @@ const UserDetails: React.FC<UserComponentProps> = ({ session }) => {
   const closeEditModal = () => {
     setIsEdit(false);
   };
-  //aqui
   useEffect(() => {
     const fetchToken = async () => {
       try {
         if (session) {
           const res = await axios.get(
-            `https://aluno-bytebushido.vercel.app/api/auth/session`
+            `${process.env.BASE}/api/auth/session`
           );
           const sessionData = res.data;
           setToken(sessionData.user.token);
@@ -47,7 +45,7 @@ const UserDetails: React.FC<UserComponentProps> = ({ session }) => {
     const fetchData = async () => {
       try {
         if (token) {
-          const res = await axios.get(`https://api-byte.vercel.app/users`, {
+          const res = await axios.get(`${process.env.BASEAPI}/users`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },

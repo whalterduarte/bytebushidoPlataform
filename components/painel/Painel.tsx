@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import styles from "./Painel.module.css";
 import MenuPainel from "../menuPainel/MenuPainel";
-import axios from "axios";
 
 const Painel = () => {
   return (

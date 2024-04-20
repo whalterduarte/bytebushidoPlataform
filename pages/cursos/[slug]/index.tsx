@@ -3,16 +3,12 @@ import axios from "axios";
 import { getSession } from "next-auth/react";
 import styles from "./Cursos.module.css";
 import { FaGitSquare } from "react-icons/fa";
-import {
-  CategoryType,
-  SubcategoryType,
-  CursoType,
-} from "../../../types/Category";
+import { CategoryType, SubcategoryType, CursoType } from "../../../types/Category";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import ReactPlayer from "react-player";
+import { Player, ControlBar, ForwardControl, PlaybackRateMenuButton } from "video-react";
+import "video-react/dist/video-react.css"; // Importe o CSS do video-react
 
 interface CategoriaProps {
   category: CategoryType;
@@ -22,8 +18,9 @@ const Categoria: React.FC<CategoriaProps> = ({ category }: CategoriaProps) => {
   const router = useRouter();
   const { slug } = router.query;
   const [selectedCurso, setSelectedCurso] = useState<CursoType | null>(null);
-  const [selectedSubcategory, setSelectedSubcategory] =
-    useState<SubcategoryType | null>(null);
+  const [selectedSubcategory, setSelectedSubcategory] = useState<SubcategoryType | null>(null);
+  const [playbackRate, setPlaybackRate] = useState<number>(1.0); // Estado para controlar a velocidade de reprodução
+  const [quality, setQuality] = useState<string>("auto"); // Estado para controlar a qualidade do vídeo, padrão para "auto"
 
   useEffect(() => {
     setSelectedCurso(null);
@@ -77,7 +74,7 @@ const Categoria: React.FC<CategoriaProps> = ({ category }: CategoriaProps) => {
             ) : (
               <div className={styles.cursomenu}>
                 <p className={styles.titleCurso}>
-                  Selecione uma curso no menu superior.
+                  Selecione um curso no menu superior.
                 </p>
               </div>
             )}
@@ -86,29 +83,24 @@ const Categoria: React.FC<CategoriaProps> = ({ category }: CategoriaProps) => {
           <div>
             {selectedCurso ? (
               <div className={styles.selectedCursoContent}>
-                <ReactPlayer
-                  url={selectedCurso.video}
-                  controls
-                  width="100%"
-                  height="100%"
-                  config={{
-                    file: {
-                      attributes: {
-                        controlsList: "nodownload",
-                      },
-                    },
-                  }}
-                />
+                <Player
+                  src={selectedCurso.video}
+                  fluid={false}
+                  width={720}
+                  height={480}
+                  autoPlay
+                  playsInline
+                >
+                  <ControlBar autoHide={false}>
+                    <ForwardControl />
+                    <PlaybackRateMenuButton rates={[0.5, 0.75, 1, 1.25, 1.5, 2]} />
+                    {/* Aqui você pode adicionar outros controles, como o botão de qualidade */}
+                  </ControlBar>
+                </Player>
               </div>
             ) : (
               <div className={styles.welcome}>
-                <Image
-                  className={styles.imgWelcome}
-                  src={"/torre.png"}
-                  alt=""
-                  height={500}
-                  width={500}
-                />
+               {/* AQUI VAI FICAR A INDEX DOS CURSOS */}
               </div>
             )}
           </div>
@@ -154,7 +146,7 @@ export const getServerSideProps: GetServerSideProps = async (
   }
 
   try {
-    const res = await axios.get(`https://api-byte.vercel.app/cursos`, {
+    const res = await axios.get(`${process.env.BASEAPI}/cursos`, {
       headers: {
         Authorization: `Bearer ${session.user.token || ""}`,
       },

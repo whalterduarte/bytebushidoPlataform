@@ -67,7 +67,7 @@ const AddCategoria = () => {
       };
 
       const response = await axios.post(
-        `https://api-byte.vercel.app/cursos/category`,
+        `${process.env.BASEAPI}/cursos/category`,
         formData,
         config
       );

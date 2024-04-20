@@ -37,17 +37,7 @@ const HomeMain = () => {
         </div>
         
        </div>
-       <div className={style.right}>
-        <h1>Ultimos post</h1>
-        <div className={style.card}>
-          card
-          
-        </div>
-        <h1>Mais acessados</h1>
-        <div className={style.card}>
-          card
-        </div>
-       </div>
+      
       </div>
     
     </main>

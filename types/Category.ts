@@ -42,4 +42,5 @@ export type CursoType = {
   createdAt: string;
   subcategoriaId: number;
   subcategoria: SubcategoryType;
+  qualityOptions: string[];
 };

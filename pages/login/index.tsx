@@ -43,6 +43,7 @@ const Login = () => {
 
   const handleLogout = async () => {
     await signOut();
+    
   };
 
   return (

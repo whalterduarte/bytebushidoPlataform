@@ -1,6 +1,7 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { AuthUser } from "../../../types/AuthUser";
+import { signOut } from "next-auth/react";
 
 // Configurações de Autenticação
 const authOptions: NextAuthOptions = {
@@ -14,7 +15,7 @@ const authOptions: NextAuthOptions = {
       },
       async authorize(credentials, req) {
         try {
-          const response = await fetch(`https://api-byte.vercel.app/login`, {
+          const response = await fetch(`${process.env.BASEAPI}/login`, {
             method: "POST",
             headers: {
               "Content-type": "application/json",
@@ -35,7 +36,7 @@ const authOptions: NextAuthOptions = {
         } catch (error) {
           console.error("Erro durante a autenticação:", error);
         }
-
+        
         return null;
       },
     }),
@@ -53,9 +54,12 @@ const authOptions: NextAuthOptions = {
       }
       return session;
     },
+  
   },
+  
   pages: {
-    signIn: "/login",
+    signIn: '/login',
+    signOut: '/',
   },
 };
 

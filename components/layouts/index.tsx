@@ -11,7 +11,7 @@ const Layout = ({children}: Props) => {
     <>
       <NavBar/>
       <main className={style.main}>{children}
-      <span className={style.cop}> Direitos reservados</span>
+    
       </main>
       
     </>

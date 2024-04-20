@@ -3,7 +3,9 @@ const { parsed: myEnv } = require("dotenv").config();
 const nextConfig = {
   env: myEnv,
   images: {
-    domains: ["galleryportwhalter.s3.sa-east-1.amazonaws.com"],
+  
+    domains: ["whalter.serveirc.com", "api.bytebushido.tech"],
+    loader: 'default', 
   },
   reactStrictMode: true,
   swcMinify: true,
