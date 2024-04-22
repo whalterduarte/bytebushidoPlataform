@@ -68,3 +68,13 @@
 .editarea {
   margin-bottom: 10px;
 }
+
+@media screen and (max-width: 455px) {
+  .container{
+    width: 250px;
+  }
+  .imgUser{
+    width: 200px;
+    height: 200px;
+  }
+}

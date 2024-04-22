@@ -26,7 +26,7 @@
 .loginButton {
   width: 50%;
   padding: 10px;
-  background: linear-gradient(to top right, #182937 100%, #96a1b6 100%);
+  background: linear-gradient(to top right, #1fc927 100%, #96a1b6 100%);
   color: white;
   border: none;
   border-radius: 5px;
@@ -36,8 +36,8 @@
 .cadastroButton {
   width: 50%;
   padding: 10px;
-  background: linear-gradient(to top right, #0cc78f 100%, #96a1b6 100%);
-  color: rgb(5, 5, 5);
+  background: linear-gradient(to top right, #64b8fc 100%, #96a1b6 100%);
+  color: rgb(255, 255, 255);
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -48,7 +48,7 @@
   background: linear-gradient(to top right, #10bea1 0%, #919aa1 100%);
 }
 .loginButton:hover {
-  background: linear-gradient(to top right, #104dbe 0%, #919aa1 100%);
+  background: linear-gradient(to top right, #269c3a 0%, #919aa1 100%);
 }
 .error {
   color: red;
@@ -78,4 +78,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+@media screen and (max-width: 455px) {
+  .login{
+    width: 240px;
+  }
 }

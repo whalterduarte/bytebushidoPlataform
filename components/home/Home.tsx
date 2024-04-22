@@ -25,8 +25,7 @@ const HomeMain = () => {
         </h1>
         <div className={style.buttons}>
         <Link className={style.login} href={'/login'}>Entrar</Link>
-        <Link className={style.login} href={'https://youtube.com.br'}>Youtube</Link>
-        <Link className={style.login} href={'/cursos'}>Tutoriais</Link>
+        <Link className={style.login} href={'/cursos'}>Cursos</Link>
         </div>
         <br />
         <Star className={style.icon} style={{ cursor: 'pointer' }} />

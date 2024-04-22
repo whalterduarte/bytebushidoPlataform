@@ -80,14 +80,13 @@ const Categoria: React.FC<CategoriaProps> = ({ category }: CategoriaProps) => {
             )}
           </main>
 
-          <div>
+          <div className={styles.selectedCursoContent}>
             {selectedCurso ? (
-              <div className={styles.selectedCursoContent}>
+              <div >
                 <Player
                   src={selectedCurso.video}
-                  fluid={false}
-                  width={720}
-                  height={480}
+                  fluid={true}
+                  
                   autoPlay
                   playsInline
                 >
@@ -101,11 +100,14 @@ const Categoria: React.FC<CategoriaProps> = ({ category }: CategoriaProps) => {
             ) : (
               <div className={styles.welcome}>
                {/* AQUI VAI FICAR A INDEX DOS CURSOS */}
+               <h1>BEM VINDO BYTE BUSHIDO</h1>
               </div>
             )}
           </div>
         </div>
-        <div>
+      
+      </div>
+      <div>
           {selectedCurso ? (
             <div className={styles.info}>
               <h1 className={styles.titleInfo}>{selectedCurso.title}</h1>
@@ -115,9 +117,13 @@ const Categoria: React.FC<CategoriaProps> = ({ category }: CategoriaProps) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <span>
+                <span className={styles.git}>
                   <FaGitSquare />
                   GitHub do projeto
+                </span>
+                <span className={styles.git}>
+                  <FaGitSquare />
+                  Forum
                 </span>
               </a>
             </div>
@@ -125,7 +131,7 @@ const Categoria: React.FC<CategoriaProps> = ({ category }: CategoriaProps) => {
             <></>
           )}
         </div>
-      </div>
+        <br />
     </div>
   );
 };
